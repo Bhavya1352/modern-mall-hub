@@ -1,20 +1,32 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Search, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import { useCart } from '@/contexts/CartContext';
 import { cn } from '@/lib/utils';
 
 const Header = () => {
   const { getTotalItems } = useCart();
   const location = useLocation();
+  const navigate = useNavigate();
   const totalItems = getTotalItems();
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
+      setShowSearch(false);
+      setSearchTerm('');
+    }
+  };
 
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Products', href: '/products' },
-    { name: 'Categories', href: '/categories' },
   ];
 
   return (
@@ -55,9 +67,28 @@ const Header = () => {
 
         {/* Enhanced Actions */}
         <div className="flex items-center space-x-3">
-          <Button variant="ghost" size="lg" className="hidden sm:flex hover:bg-gray-100/50 rounded-xl p-3">
-            <Search className="h-5 w-5 text-gray-600" />
-          </Button>
+          {showSearch ? (
+            <form onSubmit={handleSearch} className="hidden sm:flex">
+              <Input
+                type="text"
+                placeholder="Search products..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-64 rounded-xl"
+                autoFocus
+                onBlur={() => !searchTerm && setShowSearch(false)}
+              />
+            </form>
+          ) : (
+            <Button 
+              variant="ghost" 
+              size="lg" 
+              className="hidden sm:flex hover:bg-gray-100/50 rounded-xl p-3"
+              onClick={() => setShowSearch(true)}
+            >
+              <Search className="h-5 w-5 text-gray-600" />
+            </Button>
+          )}
           
           <Link to="/cart">
             <Button variant="ghost" size="lg" className="relative hover:bg-gray-100/50 rounded-xl p-3 group">

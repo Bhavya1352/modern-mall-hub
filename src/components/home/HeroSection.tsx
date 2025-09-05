@@ -20,7 +20,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 py-20 lg:py-32 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Enhanced Content */}
-          <div className="space-y-10 fade-in">
+          <div className="space-y-10">
             <div className="space-y-6">
               <Badge className="inline-flex items-center px-4 py-2 text-sm font-semibold bg-gradient-to-r from-primary/15 to-emerald-400/15 text-primary border border-primary/30 rounded-full backdrop-blur-sm">
                 <ShoppingBag className="w-4 h-4 mr-2" />
@@ -71,7 +71,7 @@ const HeroSection = () => {
           </div>
 
           {/* Enhanced Hero Image */}
-          <div className="relative slide-up">
+          <div className="relative">
             <div className="aspect-square lg:aspect-[4/3] overflow-hidden rounded-3xl shadow-[0_25px_50px_rgba(0,0,0,0.15)] relative">
               <img
                 src={heroImage}

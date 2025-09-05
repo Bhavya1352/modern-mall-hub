@@ -1,12 +1,10 @@
 import React from 'react';
 import HeroSection from '@/components/home/HeroSection';
-import FeaturedProducts from '@/components/home/FeaturedProducts';
 
 const Home = () => {
   return (
     <div>
       <HeroSection />
-      <FeaturedProducts />
       
       {/* Enhanced Features Section */}
       <section className="py-24 lg:py-32 relative">

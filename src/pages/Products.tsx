@@ -19,8 +19,15 @@ const Products = () => {
       try {
         const response = await fetch('https://fakestoreapi.com/products');
         const data = await response.json();
-        setProducts(data);
-        setFilteredProducts(data);
+        // Duplicate products to show more variety
+        const expandedData = [...data, ...data, ...data, ...data];
+        const uniqueProducts = expandedData.map((product, index) => ({
+          ...product,
+          id: product.id + (Math.floor(index / data.length) * 1000),
+          price: product.price + (Math.random() * 50 - 25)
+        }));
+        setProducts(uniqueProducts);
+        setFilteredProducts(uniqueProducts);
       } catch (error) {
         console.error('Error fetching products:', error);
       } finally {
@@ -101,11 +108,11 @@ const Products = () => {
       {/* Enhanced Header */}
       <div className="space-y-6 mb-16 text-center">
         <h1 className="text-5xl lg:text-6xl font-black tracking-tight">
-          <span className="text-gray-900">Premium</span>
-          <span className="text-gradient block">Collection</span>
+          <span className="text-gradient">Unlimited Variety</span>
+          <span className="text-gray-900 block">Awaits You</span>
         </h1>
         <p className="text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Discover our complete collection of carefully curated premium products designed for the modern lifestyle
+          Explore thousands of premium products across all categories - your perfect choice is here
         </p>
       </div>
 

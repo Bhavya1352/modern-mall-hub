@@ -135,9 +135,13 @@
 }
 
 @layer components {
-  /* Aesthetic Background Elements */
+  /* Premium Aesthetic Background */
   .bg-aesthetic {
-    background: var(--gradient-mesh), linear-gradient(135deg, hsl(0 0% 99%), hsl(210 15% 97%));
+    background: 
+      radial-gradient(circle at 20% 80%, hsl(160 84% 39% / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(240 84% 39% / 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, hsl(300 84% 39% / 0.02) 0%, transparent 50%),
+      linear-gradient(135deg, hsl(0 0% 100%), hsl(210 15% 98%));
     position: relative;
   }
   
@@ -145,67 +149,110 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--gradient-cosmic);
-    opacity: 0.03;
-    animation: rotate 60s linear infinite;
+    background: conic-gradient(from 0deg at 50% 50%, hsl(160 84% 39% / 0.01) 0deg, hsl(240 84% 39% / 0.01) 120deg, hsl(300 84% 39% / 0.01) 240deg, hsl(160 84% 39% / 0.01) 360deg);
+    animation: rotate 120s linear infinite;
     pointer-events: none;
   }
   
   .bg-hero-pattern {
     background: 
-      radial-gradient(circle at 25% 25%, hsl(160 84% 39% / 0.08) 0%, transparent 35%),
-      radial-gradient(circle at 75% 75%, hsl(240 84% 39% / 0.06) 0%, transparent 35%),
-      linear-gradient(135deg, hsl(0 0% 99%), hsl(210 15% 98%));
+      radial-gradient(ellipse at top left, hsl(160 84% 39% / 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, hsl(240 84% 39% / 0.03) 0%, transparent 50%),
+      linear-gradient(135deg, hsl(0 0% 100%), hsl(210 15% 99%));
   }
 
-  /* Premium card components */
+  /* Ultra-Premium Card System */
   .card-elevated {
-    @apply bg-card/80 backdrop-blur-sm border border-card-border rounded-lg shadow-md hover:shadow-lg transition-all duration-300;
+    @apply bg-white/95 backdrop-blur-xl border border-white/20 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-all duration-500 hover:-translate-y-2;
   }
   
   .card-product {
-    @apply bg-card/90 backdrop-blur-sm border border-card-border rounded-lg shadow-sm hover:shadow-md transition-all duration-300;
+    @apply bg-white/90 backdrop-blur-lg border border-gray-100/50 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] transition-all duration-400 hover:-translate-y-1 group overflow-hidden relative;
   }
 
-  /* Button variants */
+  .card-product::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none;
+  }
+
+  /* Premium Button System */
   .btn-primary {
-    @apply bg-primary hover:bg-primary-hover text-primary-foreground px-6 py-3 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md;
+    @apply bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-[0_4px_16px_rgba(34,197,94,0.2)] hover:shadow-[0_8px_24px_rgba(34,197,94,0.3)] hover:-translate-y-0.5;
   }
   
   .btn-secondary {
-    @apply bg-secondary hover:bg-secondary-hover text-secondary-foreground px-6 py-3 rounded-lg font-medium transition-all duration-200;
+    @apply bg-white/80 backdrop-blur-sm hover:bg-white/90 text-gray-700 px-8 py-4 rounded-xl font-semibold transition-all duration-300 border border-gray-200/50 hover:border-gray-300/50 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)];
   }
 
-  /* Grid layouts */
+  /* Responsive Grid Layouts */
   .grid-products {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8;
   }
   
   .grid-featured {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+    @apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10;
   }
 
-  /* Text utilities */
+  /* Enhanced Text Effects */
   .text-gradient {
-    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary via-emerald-500 to-teal-500 bg-clip-text text-transparent;
   }
 
-  /* Animation utilities */
+  .text-premium {
+    @apply text-gray-800 font-medium tracking-wide;
+  }
+
+  /* Smooth Animations */
   .hover-lift {
-    @apply transform transition-transform duration-200 hover:-translate-y-1;
+    @apply transform transition-all duration-400 hover:-translate-y-2 hover:scale-[1.02];
   }
   
   .fade-in {
-    @apply animate-fade-in;
+    @apply animate-in fade-in-0 slide-in-from-bottom-4 duration-700;
   }
 
-  /* Floating elements */
+  .slide-up {
+    @apply animate-in fade-in-0 slide-in-from-bottom-8 duration-1000;
+  }
+
+  /* Floating Animations */
   .floating {
-    animation: float 6s ease-in-out infinite;
+    animation: float 8s ease-in-out infinite;
   }
   
   .floating-delayed {
-    animation: float 6s ease-in-out infinite;
-    animation-delay: -2s;
+    animation: float 8s ease-in-out infinite;
+    animation-delay: -3s;
   }
+
+  /* Premium Filter Bar */
+  .filter-bar {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.06)];
+  }
+
+  /* Product Image Container */
+  .product-image {
+    @apply relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-gray-100;
+  }
+
+  .product-image::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(-5px) rotate(-1deg); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(34, 197, 94, 0.2); }
 }

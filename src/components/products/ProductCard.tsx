@@ -33,61 +33,70 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, featured = false }) 
   return (
     <Link to={`/products/${product.id}`} className="block h-full">
       <div className={cardClasses}>
-        {/* Image */}
-        <div className="aspect-square overflow-hidden rounded-t-lg bg-muted">
+        {/* Image Container */}
+        <div className="product-image aspect-square">
           <img
             src={product.image}
             alt={product.title}
-            className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+            className="h-full w-full object-cover object-center group-hover:scale-110 transition-all duration-700 ease-out"
           />
+          {/* Overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
 
         {/* Content */}
-        <div className="p-4 space-y-3">
-          {/* Category */}
+        <div className="p-6 space-y-4">
+          {/* Category Badge */}
           <Badge 
             variant="secondary" 
-            className="text-xs font-medium capitalize"
+            className="text-xs font-semibold capitalize bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors"
           >
             {product.category}
           </Badge>
 
           {/* Title */}
-          <h3 className="font-semibold text-base line-clamp-2 group-hover:text-primary transition-colors">
+          <h3 className="font-bold text-lg leading-tight line-clamp-2 group-hover:text-primary transition-colors duration-300 text-gray-800">
             {product.title}
           </h3>
 
           {/* Rating */}
-          <div className="flex items-center space-x-1">
-            <div className="flex items-center">
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-0.5">
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`h-3 w-3 ${
+                  className={`h-4 w-4 transition-colors ${
                     i < Math.floor(product.rating.rate)
-                      ? 'fill-yellow-400 text-yellow-400'
-                      : 'text-muted-foreground'
+                      ? 'fill-amber-400 text-amber-400'
+                      : 'text-gray-200'
                   }`}
                 />
               ))}
             </div>
-            <span className="text-xs text-muted-foreground">
-              ({product.rating.count})
+            <span className="text-sm text-gray-500 font-medium">
+              {product.rating.rate} ({product.rating.count})
             </span>
           </div>
 
           {/* Price and Actions */}
-          <div className="flex items-center justify-between pt-2">
-            <span className="text-lg font-bold text-primary">
-              ${product.price.toFixed(2)}
-            </span>
+          <div className="flex items-center justify-between pt-3">
+            <div className="space-y-1">
+              <span className="text-2xl font-bold text-gray-900">
+                ${product.price.toFixed(2)}
+              </span>
+              {featured && (
+                <div className="text-sm text-gray-500 line-through">
+                  ${(product.price * 1.2).toFixed(2)}
+                </div>
+              )}
+            </div>
             <Button
               size="sm"
               onClick={handleAddToCart}
-              className="opacity-0 group-hover:opacity-100 transition-opacity"
+              className="opacity-0 group-hover:opacity-100 transition-all duration-300 bg-gradient-to-r from-primary to-emerald-600 hover:from-emerald-600 hover:to-primary shadow-lg hover:shadow-xl transform hover:scale-105"
             >
-              <ShoppingCart className="h-4 w-4 mr-1" />
-              Add
+              <ShoppingCart className="h-4 w-4 mr-2" />
+              Add to Cart
             </Button>
           </div>
         </div>

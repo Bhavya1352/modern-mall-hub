@@ -98,58 +98,69 @@ const Products = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* Header */}
-      <div className="space-y-4 mb-8">
-        <h1 className="text-3xl lg:text-4xl font-bold">All Products</h1>
-        <p className="text-muted-foreground">
-          Discover our complete collection of premium products
+      {/* Enhanced Header */}
+      <div className="space-y-6 mb-16 text-center">
+        <h1 className="text-5xl lg:text-6xl font-black tracking-tight">
+          <span className="text-gray-900">Premium</span>
+          <span className="text-gradient block">Collection</span>
+        </h1>
+        <p className="text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Discover our complete collection of carefully curated premium products designed for the modern lifestyle
         </p>
       </div>
 
-      {/* Filters */}
-      <div className="flex flex-col lg:flex-row gap-4 mb-8">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-          <Input
-            placeholder="Search products..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
-          />
+      {/* Enhanced Filters */}
+      <div className="filter-bar mb-12">
+        <div className="flex flex-col lg:flex-row gap-6">
+          <div className="relative flex-1">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+            <Input
+              placeholder="Search premium products..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-12 pr-4 py-4 text-lg border-gray-200/50 rounded-xl bg-white/50 backdrop-blur-sm focus:bg-white/80 transition-all duration-300 shadow-sm hover:shadow-md"
+            />
+          </div>
+          
+          <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <SelectTrigger className="w-full lg:w-56 py-4 px-4 text-lg border-gray-200/50 rounded-xl bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all duration-300 shadow-sm hover:shadow-md">
+              <SelectValue placeholder="All Categories" />
+            </SelectTrigger>
+            <SelectContent className="rounded-xl border-gray-200/50 bg-white/95 backdrop-blur-xl">
+              <SelectItem value="all" className="text-lg py-3">All Categories</SelectItem>
+              {categories.map(category => (
+                <SelectItem key={category} value={category} className="capitalize text-lg py-3">
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger className="w-full lg:w-56 py-4 px-4 text-lg border-gray-200/50 rounded-xl bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all duration-300 shadow-sm hover:shadow-md">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent className="rounded-xl border-gray-200/50 bg-white/95 backdrop-blur-xl">
+              <SelectItem value="default" className="text-lg py-3">Featured</SelectItem>
+              <SelectItem value="price-low" className="text-lg py-3">Price: Low to High</SelectItem>
+              <SelectItem value="price-high" className="text-lg py-3">Price: High to Low</SelectItem>
+              <SelectItem value="rating" className="text-lg py-3">Highest Rated</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-        
-        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-          <SelectTrigger className="w-full lg:w-48">
-            <SelectValue placeholder="Category" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            {categories.map(category => (
-              <SelectItem key={category} value={category} className="capitalize">
-                {category}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        <Select value={sortBy} onValueChange={setSortBy}>
-          <SelectTrigger className="w-full lg:w-48">
-            <SelectValue placeholder="Sort by" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="default">Default</SelectItem>
-            <SelectItem value="price-low">Price: Low to High</SelectItem>
-            <SelectItem value="price-high">Price: High to Low</SelectItem>
-            <SelectItem value="rating">Highest Rated</SelectItem>
-          </SelectContent>
-        </Select>
       </div>
 
-      {/* Results */}
-      <div className="mb-6">
-        <p className="text-muted-foreground">
-          Showing {filteredProducts.length} of {products.length} products
-        </p>
+      {/* Enhanced Results */}
+      <div className="mb-10">
+        <div className="flex items-center justify-between">
+          <p className="text-lg font-semibold text-gray-700">
+            Showing <span className="text-primary font-bold">{filteredProducts.length}</span> of <span className="text-primary font-bold">{products.length}</span> premium products
+          </p>
+          <div className="hidden md:flex items-center space-x-2 text-sm text-gray-500">
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+            <span>Live inventory</span>
+          </div>
+        </div>
       </div>
 
       {/* Products Grid */}

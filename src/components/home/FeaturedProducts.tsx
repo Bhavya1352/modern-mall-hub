@@ -57,8 +57,10 @@ const FeaturedProducts = () => {
   }
 
   return (
-    <section className="py-16 lg:py-24 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section className="py-16 lg:py-24 relative">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 bg-gradient-to-br from-muted/20 to-transparent"></div>
+      <div className="container mx-auto px-4 relative">
         {/* Header */}
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold">Featured Products</h2>

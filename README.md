@@ -226,19 +226,3 @@ yarn test
 - Add tests for new features
 - Update documentation as needed
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Support
-
-If you have any questions or need help, please:
-
-- **Create an issue** on GitHub
-- **Check the documentation** in the `/docs` folder
-- **Contact the maintainers** via email
-
----
-
-Made with ❤️ by [Your Name]
-
